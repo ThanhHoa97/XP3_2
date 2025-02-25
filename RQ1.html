@@ -215,38 +215,38 @@
         <!-- image for scenario 1 -->
         <div class="image-container" id="image-container-1">
             <!-- Image 1 -->
-            <img src="images/scenario1/image1.png" alt="Image 1">
+            <img src="RQ1/images/image1.png" alt="Image 1">
         </div>
 
         <!-- image for scenario 2 -->
         <div class="image-container" id="image-container-2">
             <!-- Image 1 -->
-            <img src="images/scenario2/image2.png" alt="Image 2">
+            <img src="RQ1/images/image2.png" alt="Image 2">
         </div>
 
         <!-- image for scenario 3 -->
         <div class="image-container" id="image-container-3">
             <!-- Image 1 -->
-            <img src="images/scenario3/image3.png" alt="Image 3">
+            <img src="RQ1/images/image3.png" alt="Image 3">
         </div>
 
          <!-- image for scenario 4 -->
          <div class="image-container" id="image-container-4">
             <!-- Image 1 -->
-            <img src="images/scenario4/image4.png" alt="Image 4">
+            <img src="RQ1/images/image4.png" alt="Image 4">
         </div>
 
         <!-- image for scenario 5 -->
         <div class="image-container" id="image-container-5">
             <!-- Image 1 -->
-            <img src="images/scenario5/image5.png" alt="Image 5">
+            <img src="RQ1/images/image5.png" alt="Image 5">
         </div>       
 
 
         <form id="scenario-questionnaire-container">
             <h3>Thanks for finish this scenario. </h3>
-            <p>Please provide your rankings for each visualization (1 (best) -6 (not good)) across the factors below. Each value in a row must be unique.</p>
-            <p>Veuillez indiquer votre classement pour chaque visualisation (1 (meilleur) - 6 (moins bon)) en fonction des facteurs ci-dessous. Chaque valeur d'une ligne doit être unique.</p>
+            <p>Please provide your rankings for each visualization (1 (best) -5 (not good)) across the factors below. Each value in a row must be unique.</p>
+            <p>Veuillez indiquer votre classement pour chaque visualisation (1 (meilleur) - 5 (moins bon)) en fonction des facteurs ci-dessous. Chaque valeur d'une ligne doit être unique.</p>
             <table>
                 <thead>
                     <tr>
@@ -539,13 +539,13 @@
                     responses: { q1, q2, q3, q4, q5},
                     submissionTime: new Date().toISOString(),
                 });
-                if (currentVideoIndex >= 5)
+                if (currentVideoIndex >= 4)
                 {
                     questionnaireContainer.style.display = "none";
                     videoContainer.style.display = "none";
                     document.getElementById("introduction-containner").style.display = "none";
 
-                    console.log("current scenario indexe 1 ", currentScenarioIndex);
+                    console.log("current scenario indexe 2 ", currentScenarioIndex);
 
                     //get scenario indiex for image
                     strScenario = scenarioOrder[currentScenarioIndex];
