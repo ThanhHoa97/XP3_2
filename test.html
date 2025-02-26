@@ -182,7 +182,7 @@
             <img src="RQ1/images/image5.png" alt="Image 5">
         </div>       
 
-
+        <!-- ranking for S1, S2, S3, S4 -->
         <form id="scenario-questionnaire-container">
             <h3>Thanks for finish this scenario. </h3>
             <p>Please provide your rankings for each visualization (1 (best) -5 (not good)) across the factors below. Each value in a row must be unique.</p>
@@ -193,9 +193,9 @@
                         <th>Factor</th>
                         <th>Baseline</th>
                         <th>Single goal</th>
-                        <th>Multiple goal</th>
+                        <th class="removable">Multiple goals</th>
                         <th>Single path</th>
-                        <th>Multioe path</th>
+                        <th class="removable">Multiple paths</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -203,35 +203,35 @@
                         <td>Trust</td>
                         <td><input type="number" name="trust1" min="1" max="6" required></td>
                         <td><input type="number" name="trust2" min="1" max="6" required></td>
-                        <td><input type="number" name="trust3" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="trust3" min="1" max="6" required></td>
                         <td><input type="number" name="trust4" min="1" max="6" required></td>
-                        <td><input type="number" name="trust5" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="trust5" min="1" max="6" required></td>
 
                     </tr>
                     <tr data-factor="Situation Awareness">
                         <td>Situation Awareness (SA)</td>
                         <td><input type="number" name="sa1" min="1" max="6" required></td>
                         <td><input type="number" name="sa2" min="1" max="6" required></td>
-                        <td><input type="number" name="sa3" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="sa3" min="1" max="6" required></td>
                         <td><input type="number" name="sa4" min="1" max="6" required></td>
-                        <td><input type="number" name="sa5" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="sa5" min="1" max="6" required></td>
 
                     </tr>
                     <tr data-factor="Safety">
                         <td>Safety</td>
                         <td><input type="number" name="safety1" min="1" max="6" required></td>
                         <td><input type="number" name="safety2" min="1" max="6" required></td>
-                        <td><input type="number" name="safety3" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="safety3" min="1" max="6" required></td>
                         <td><input type="number" name="safety4" min="1" max="6" required></td>
-                        <td><input type="number" name="safety5" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="safety5" min="1" max="6" required></td>
                     </tr>
                     <tr data-factor="Likability">
                         <td>Likability</td>
                         <td><input type="number" name="likability1" min="1" max="6" required></td>
                         <td><input type="number" name="likability2" min="1" max="6" required></td>
-                        <td><input type="number" name="likability3" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="likability3" min="1" max="6" required></td>
                         <td><input type="number" name="likability4" min="1" max="6" required></td>
-                        <td><input type="number" name="likability5" min="1" max="6" required></td>
+                        <td class="removable"><input type="number" name="likability5" min="1" max="6" required></td>
                     </tr>
                 </tbody>
             </table>
@@ -262,8 +262,11 @@
 
         // Videos for each scenario
         const videos = {
-            "Scenario 1": ["RQ1/scenario1/video1-1.mp4", "RQ1/scenario1/video1-2.mp4"],
-            "Scenario 2": ["RQ1/scenario2/video2-1.mp4", "RQ1/scenario2/video2-2.mp4"]
+            "Scenario 1": ["RQ1/scenario1/video1-1.mp4", "RQ1/scenario1/video1-2.mp4", "RQ1/scenario1/video1-3.mp4", "RQ1/scenario1/video1-4.mp4", "RQ1/scenario1/video1-5.mp4"],
+            "Scenario 2": ["RQ1/scenario2/video2-1.mp4", "RQ1/scenario2/video2-2.mp4", "RQ1/scenario2/video2-3.mp4", "RQ1/scenario2/video2-4.mp4", "RQ1/scenario2/video2-5.mp4"],
+            "Scenario 3": ["RQ1/scenario3/video3-1.mp4", "RQ1/scenario3/video3-2.mp4", "RQ1/scenario3/video3-3.mp4", "RQ1/scenario3/video3-4.mp4", "RQ1/scenario3/video3-5.mp4"],
+            "Scenario 4": ["RQ1/scenario4/video4-1.mp4", "RQ1/scenario4/video4-2.mp4", "RQ1/scenario4/video4-3.mp4", "RQ1/scenario4/video4-4.mp4", "RQ1/scenario4/video4-5.mp4"],
+            "Scenario 5": ["RQ1/scenario5/video5-1.mp4", "RQ1/scenario5/video5-2.mp4", "RQ1/scenario5/video5-5.mp4"]
         };
 
         // Shuffle an array randomly
@@ -472,7 +475,9 @@
                     responses: { q1},
                     submissionTime: new Date().toISOString(),
                 });
-                if (currentVideoIndex >= 1)
+
+                //Display ranking 
+                if (currentVideoIndex >= randomizedVideos.length-1)
                 {
                     questionnaireContainer.style.display = "none";
                     videoContainer.style.display = "none";
@@ -490,6 +495,7 @@
                     console.log("imagecontainer : ",imagecontainer);
 
                     imagecontainer.style.display = "block";
+                    updateTable(randomizedVideos.length)
                     scenarioQuestionnaireContainer.style.display = "block";
                     //nextScenarioButton.style.display = "block";
                 }
@@ -503,6 +509,28 @@
                 
             });
 
+            function updateTable(n) {
+                let removableColumns = document.querySelectorAll(".removable");
+
+                if (n === 3) {
+                    removableColumns.forEach(col => {
+                        col.style.display = "none"; 
+                        col.querySelectorAll("input").forEach(input => {
+                            input.disabled = true;  // Disable inputs in removed columns
+                            input.removeAttribute("required");  // Remove required attribute
+                        });
+                    });
+                } else {
+                    removableColumns.forEach(col => {
+                        col.style.display = "table-cell";
+                        col.querySelectorAll("input").forEach(input => {
+                            input.disabled = false;  // Enable inputs when columns are visible
+                            input.setAttribute("required", "required");  // Restore required attribute
+                        });
+                    });
+                }
+            }
+
             function getSelectedValue(questionId) {
                 const selectedRadio = document.querySelector(`input[name="${questionId}"]:checked`);
                 return selectedRadio ? selectedRadio.value : null;
@@ -510,8 +538,8 @@
 
             // Helper function to clear all radio button selections in a given section
             function clearAnswers(sectionId) {
-            const radios = document.querySelectorAll(`#${sectionId} input[type="radio"]`);
-            radios.forEach(radio => radio.checked = false);
+                const radios = document.querySelectorAll(`#${sectionId} input[type="radio"]`);
+                radios.forEach(radio => radio.checked = false);
             }
 
             document.getElementById('scenario-questionnaire-container').addEventListener('submit', function(event) {
@@ -525,9 +553,16 @@
                 let valid = true;
                 const errorMessage = document.getElementById('error-message');
                 errorMessage.textContent = '';
+                console.log("row value",rows);
+
+                let rankings = {};
 
                 rows.forEach(row => {
-                    const inputs = Array.from(row.querySelectorAll('input[type="number"]'));
+                    let inputs = Array.from(row.querySelectorAll('input[type="number"]'));
+
+                    if (randomizedVideos.length == 3) {
+                        inputs = inputs.filter(input => !input.disabled);
+                    }
                     const values = inputs.map(input => input.value);
 
                     // Check for duplicates
@@ -537,15 +572,15 @@
                         const factor = row.getAttribute('data-factor');
                         errorMessage.textContent = `Each value in the row for "${factor}" must be unique.`;
                     }
+
+                    // Store values in rankings object
+                    inputs.forEach(input => {
+                        rankings[input.name] = input.value;
+                    });
+
                 });
 
                 if (valid) {
-                    const formData = new FormData(event.target);
-                    const rankings = {};
-                    formData.forEach((value, key) => {
-                    rankings[key] = value;
-                    });
-
                     answers.push({
                     participantID,
                     scenario: scenarioOrder[currentScenarioIndex],
@@ -559,6 +594,8 @@
                     submissionTime: new Date().toISOString(),
                     responses: { rankings }
                     });
+
+                    console.log("Collected Data:", rankings);
 
                     nextScenarioButton.style.display = "block";
                 }
